@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-app-dark text-white danw idc0_343">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" type="image/png" href="https://osspledge.com/favicon.png">
+        <title>Open Source Pledge</title>
+        <meta name="description" content="Our companies feast year after year at the Open Source table. It's time to settle up.">
+        <meta property="og:url" content="https://osspledge.com">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Open Source Pledge">
+        <meta property="og:description" content="Our companies feast year after year at the Open Source table. It's time to settle up. ">
+        <meta property="og:image" content="https://osspledge.com/logos/opensourcepledge-logo-horiz-color-opengraph.png">
+<style>
+@import"https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap";
+@import"https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap";
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: rgb(24, 18, 37);
+    font-family: 'Libre Franklin', system-ui, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Azeret Mono', 'Courier New', Courier, monospace;
+}
+
+a {
+    color: rgb(45, 222, 116);
+}
+
+a:hover {
+    color: rgb(255, 112, 188);
+}
+
+p {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.container {
+    margin: auto;
+    padding: 0 1rem;
+    max-width: 32rem;
+}
+
+header {
+    padding: 2rem 0;
+}
+
+header img {
+    max-height: 3.5rem;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-collapse: collapse;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+table td, table th {
+    text-align: left;
+    padding: 0.3rem 0;
+}
+
+table td:nth-child(2), table th:nth-child(2) {
+    text-align: right;
+}
+
+span.confetti {
+    margin-left: 0.5rem;
+}
+</style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <img src="https://osspledge.com/logos/opensourcepledge-logo-horiz-color.png">
+            </header>
+            <main>
+                <p>
+                    Which companies have made the Pledge?
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Pledge Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range . }}
+                            <tr>
+                                <td><a href="{{ .Url }}">{{ .Name }}</a></td>
+                                <td>
+                                    {{ if eq .Pledged 0 }}
+                                    Pledged! <span class="confetti">🎉</span>
+                                    {{ else if eq .Pledged 1 }}
+                                    Refused
+                                    {{ else if eq .Pledged 2 }}
+                                    Pending…
+                                    {{ end }}
+                                </td>
+                            </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </body>
+</html>

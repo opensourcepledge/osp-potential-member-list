@@ -1,0 +1,12 @@
+[Unit]
+Description=osp-potential-member-list
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/srv/www/osp-potential-member-list
+ExecStart=/srv/www/osp-potential-member-list/bin/osp-potential-member-list
+
+[Install]
+WantedBy=multi-user.target
