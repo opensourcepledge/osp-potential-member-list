@@ -4,5 +4,8 @@
 
 .PHONY: publish
 
-publish:
+bin/osp-potential-member-list:
+	go build -o bin/ .
+
+publish: bin/osp-potential-member-list
 	rsync -Pvrthl --delete --exclude .git --info=progress2 ./ yavin:/srv/www/osp-potential-member-list
