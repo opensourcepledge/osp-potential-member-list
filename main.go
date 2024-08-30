@@ -15,11 +15,12 @@ import (
 )
 
 const SHEET_ID = "1hzRN_ZJjlh4979HAp6wkhebXmlgXVX6i44tpQihJEdQ"
-const SHEET_RANGE = "A2:G500"
+const SHEET_RANGE = "'Potential Members'!A2:C500"
 const SHEET_REFRESH_N_SECONDS = 60 * 10 // 10 minutes
 
 const (
         PledgedYes = iota
+        PledgedMaybe
         PledgedRefused
         PledgedUnknown
 )
@@ -34,19 +35,20 @@ func getMembers() []Member {
         cells := getSheetRange(SHEET_ID, SHEET_RANGE)
         members := make([]Member, 0, len(cells))
         for _, row := range cells {
-                if len(row) < 7 {
-                        continue
-                }
                 pledgeStatus := PledgedUnknown
-                putativeStatus := strings.ToLower(row[1].(string))
-                if strings.Contains(putativeStatus, "yes") {
-                        pledgeStatus = PledgedYes
-                } else if strings.Contains(putativeStatus, "refused") {
-                        pledgeStatus = PledgedRefused
+                if len(row) >= 3 {
+                        putativeStatus := strings.ToLower(row[2].(string))
+                        if strings.Contains(putativeStatus, "yes") {
+                                pledgeStatus = PledgedYes
+                        } else if strings.Contains(putativeStatus, "maybe") {
+                                pledgeStatus = PledgedMaybe
+                        } else if strings.Contains(putativeStatus, "no") {
+                                pledgeStatus = PledgedRefused
+                        }
                 }
                 members = append(members, Member {
                         Name: row[0].(string),
-                        Url: row[6].(string),
+                        Url: "",
                         Pledged: pledgeStatus,
                 })
         }

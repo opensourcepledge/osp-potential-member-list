@@ -114,8 +114,10 @@ span.confetti {
                                     {{ if eq .Pledged 0 }}
                                     Pledged! <span class="confetti">🎉</span>
                                     {{ else if eq .Pledged 1 }}
-                                    Refused
+                                    Onboarding
                                     {{ else if eq .Pledged 2 }}
+                                    Refused
+                                    {{ else if eq .Pledged 3 }}
                                     Pending…
                                     {{ end }}
                                 </td>
