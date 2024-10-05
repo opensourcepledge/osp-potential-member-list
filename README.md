@@ -3,6 +3,9 @@
 This program runs a web server which serves information from the private “Open Source Pledge Potential Member List”
 spreadsheet.
 
+> [!NOTE]
+> **DEPRECATED**: This project has been deprecated for now because of changes to our CRM spreadsheet.
+
 ## Setup
 
 To run this program, you need a Google account that has access to the spreadsheet.
